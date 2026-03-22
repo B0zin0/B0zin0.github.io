@@ -1,2 +1,2 @@
-# StoryForge.github.io
-Website
+# StoryForge Website
+Website for storyforge 
