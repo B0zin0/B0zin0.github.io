@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>StoryForge — MCSM Launcher</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --gold:    #FFAA00;
+            --gold2:   #CC8800;
+            --bg:      #080808;
+            --panel:   #0D0D0D;
+            --border:  #222222;
+            --text:    #E0E0E0;
+            --dim:     #777777;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+        }
+
+        /* Nav */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            background: rgba(8,8,8,0.95);
+            border-bottom: 1px solid var(--border);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 48px;
+            height: 60px;
+        }
+
+        .nav-logo {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--gold);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .nav-links { display: flex; gap: 32px; }
+        .nav-links a {
+            color: var(--dim);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        .nav-links a:hover { color: var(--gold); }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 24px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(255,170,0,0.06) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255,170,0,0.1);
+            border: 1px solid rgba(255,170,0,0.3);
+            color: var(--gold);
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 6px 16px;
+            border-radius: 2px;
+            margin-bottom: 28px;
+        }
+
+        .hero h1 {
+            font-size: clamp(42px, 8vw, 80px);
+            font-weight: 700;
+            color: var(--gold);
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            line-height: 1;
+            margin-bottom: 20px;
+            text-shadow: 0 0 60px rgba(255,170,0,0.3);
+        }
+
+        .hero p {
+            font-size: 17px;
+            color: var(--dim);
+            max-width: 520px;
+            line-height: 1.7;
+            margin-bottom: 48px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn-gold {
+            background: var(--gold);
+            color: #000;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 14px 32px;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background 0.2s, transform 0.1s;
+            display: inline-block;
+        }
+        .btn-gold:hover { background: #FFB733; transform: translateY(-1px); }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text);
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 14px 32px;
+            border: 1px solid var(--border);
+            cursor: pointer;
+            text-decoration: none;
+            transition: border-color 0.2s, color 0.2s;
+            display: inline-block;
+        }
+        .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+        /* Gold line divider */
+        .gold-line {
+            width: 60px;
+            height: 2px;
+            background: var(--gold);
+            margin: 0 auto 48px;
+        }
+
+        /* Sections */
+        section {
+            padding: 100px 24px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 12px;
+        }
+
+        .section-title {
+            font-size: clamp(28px, 4vw, 42px);
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+
+        .section-body {
+            font-size: 15px;
+            color: var(--dim);
+            line-height: 1.8;
+            max-width: 600px;
+        }
+
+        /* Features grid */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1px;
+            background: var(--border);
+            border: 1px solid var(--border);
+            margin-top: 64px;
+        }
+
+        .feature {
+            background: var(--panel);
+            padding: 32px;
+        }
+
+        .feature-icon { font-size: 28px; margin-bottom: 16px; }
+
+        .feature h3 {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 10px;
+        }
+
+        .feature p {
+            font-size: 13px;
+            color: var(--dim);
+            line-height: 1.7;
+        }
+
+        /* Seasons */
+        .seasons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-top: 48px;
+        }
+
+        .season-card {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            padding: 32px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .season-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 2px;
+        }
+
+        .season-card.s1::before { background: #AA44FF; }
+        .season-card.s2::before { background: #00FFAA; }
+
+        .season-card h3 {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 8px;
+        }
+
+        .season-card .year {
+            font-size: 11px;
+            color: var(--dim);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+
+        .season-card p {
+            font-size: 13px;
+            color: var(--dim);
+            line-height: 1.7;
+        }
+
+        /* Download section */
+        .download-section {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-top: 2px solid var(--gold);
+            padding: 64px 48px;
+            text-align: center;
+            margin: 0 24px;
+        }
+
+        .download-section h2 {
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--gold);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+
+        .download-section p {
+            color: var(--dim);
+            font-size: 14px;
+            margin-bottom: 36px;
+            line-height: 1.7;
+        }
+
+        .version-badge {
+            display: inline-block;
+            background: rgba(255,170,0,0.1);
+            border: 1px solid rgba(255,170,0,0.2);
+            color: var(--gold2);
+            font-size: 11px;
+            padding: 4px 12px;
+            margin-bottom: 24px;
+            letter-spacing: 1px;
+        }
+
+        .system-req {
+            margin-top: 24px;
+            font-size: 12px;
+            color: var(--dim);
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 40px 48px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        footer .logo { color: var(--gold); font-weight: 700; letter-spacing: 2px; font-size: 14px; }
+        footer p { color: var(--dim); font-size: 12px; }
+        footer a { color: var(--dim); text-decoration: none; font-size: 12px; }
+        footer a:hover { color: var(--gold); }
+
+        /* Windows defender notice */
+        .defender-notice {
+            background: rgba(255,170,0,0.05);
+            border: 1px solid rgba(255,170,0,0.2);
+            padding: 20px 24px;
+            margin-top: 32px;
+            text-align: left;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .defender-notice h4 {
+            color: var(--gold);
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .defender-notice p {
+            color: var(--dim);
+            font-size: 12px;
+            line-height: 1.7;
+            margin-bottom: 0;
+        }
+
+        @media (max-width: 768px) {
+            nav { padding: 0 20px; }
+            .nav-links { display: none; }
+            .seasons { grid-template-columns: 1fr; }
+            footer { flex-direction: column; text-align: center; }
+            .download-section { padding: 40px 24px; margin: 0 12px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Nav -->
+    <nav>
+        <span class="nav-logo">StoryForge</span>
+        <div class="nav-links">
+            <a href="#features">Features</a>
+            <a href="#seasons">Seasons</a>
+            <a href="#download">Download</a>
+            <a href="https://github.com/B0zin0/StoryForge" target="_blank">GitHub</a>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <div class="hero">
+        <span class="hero-badge">MCSM Launcher — v1.0</span>
+        <h1>StoryForge</h1>
+        <p>The cleanest way to launch Minecraft: Story Mode. One click to play, built by a fan, kept alive for the community.</p>
+        <div class="hero-buttons">
+            <a href="#download" class="btn-gold">Download Now</a>
+            <a href="https://github.com/B0zin0/StoryForge" class="btn-outline" target="_blank">View on GitHub</a>
+        </div>
+    </div>
+
+    <!-- Features -->
+    <section id="features">
+        <div class="section-label">What's inside</div>
+        <h2 class="section-title">Everything you need to play</h2>
+        <p class="section-body">StoryForge isn't just a shortcut. It's a proper launcher built from scratch with features that actually make sense for MCSM.</p>
+
+        <div class="features">
+            <div class="feature">
+                <div class="feature-icon">🎮</div>
+                <h3>One-click launch</h3>
+                <p>Pick your season from the home screen and hit play. The launcher finds your game, pauses the music, launches it, and resumes when you're done.</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🔍</div>
+                <h3>Auto game detection</h3>
+                <p>Can't find where your game installed? Hit Auto-Detect and StoryForge scans your drives, Steam library, and common install paths to find it automatically.</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🧩</div>
+                <h3>Mod manager</h3>
+                <p>Install, enable, disable, and remove mods without touching any game files manually. Supports textures, scripts, audio, archives and more.</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🎵</div>
+                <h3>Background music</h3>
+                <p>The launcher plays the MCSM theme while you're on the home screen. Volume slider included. Music pauses when you launch the game and comes back when you close it.</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🔔</div>
+                <h3>Auto update checker</h3>
+                <p>StoryForge checks GitHub for new releases on startup and shows a banner if there's an update waiting. You never have to check manually.</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🎮</div>
+                <h3>Discord Rich Presence</h3>
+                <p>Shows what season you're playing in your Discord status. Automatically updates when you launch a game and clears when you close it.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seasons -->
+    <section id="seasons">
+        <div class="section-label">Supported games</div>
+        <h2 class="section-title">Both seasons, fully supported</h2>
+        <p class="section-body">StoryForge works with both seasons of Minecraft: Story Mode. Select your season from the home screen and go.</p>
+
+        <div class="seasons">
+            <div class="season-card s1">
+                <h3>Season 1</h3>
+                <div class="year">2015 — Telltale Games</div>
+                <p>Eight episodes following Jesse and the Order of the Stone. One of Telltale's most beloved games. The Wither Storm saga that started it all.</p>
+            </div>
+            <div class="season-card s2">
+                <h3>Season 2</h3>
+                <div class="year">2017 — Telltale Games</div>
+                <p>Five episodes with Jesse facing the Admin and a whole new set of challenges. Darker, higher stakes, and a different kind of adventure.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download -->
+    <div class="download-section" id="download">
+        <span class="version-badge">v1.0 — Windows 10/11</span>
+        <h2>Download</h2>
+        <p>Free. No installer. No account. Just unzip and run.<br>Keep StoryForge.exe and the Assets folder together.</p>
+        <a href="https://github.com/B0zin0/StoryForge/releases/latest" class="btn-gold" target="_blank">
+            Download StoryForge v1.0
+        </a>
+        <div class="system-req">Windows 10 or 11 (64-bit) · No install required · ~15MB</div>
+
+        <div class="defender-notice">
+            <h4>⚠ Windows Defender warning?</h4>
+            <p>Because StoryForge isn't signed with a paid certificate yet, Windows might flag it as unknown. It's completely safe — the full source code is on GitHub for anyone to check. To run it: click <strong>More info</strong> on the warning, then <strong>Run anyway</strong>.</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <span class="logo">STORYFORGE</span>
+        <p>Not affiliated with Telltale Games or Mojang. Built by B0zin0 for the community.</p>
+        <div style="display:flex;gap:24px;">
+            <a href="https://github.com/B0zin0/StoryForge" target="_blank">GitHub</a>
+            <a href="https://github.com/B0zin0/StoryForge/releases" target="_blank">Releases</a>
+        </div>
+    </footer>
+
+</body>
+</html>
