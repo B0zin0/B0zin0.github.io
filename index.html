@@ -16,13 +16,21 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
-            --gold:   #FFAA00;
-            --gold2:  #CC8800;
-            --bg:     #080808;
-            --panel:  #0D0D0D;
-            --border: #1E1E1E;
-            --text:   #E0E0E0;
-            --dim:    #666666;
+            --bg:      #0f0f17;
+            --panel:   #16161f;
+            --panel2:  #1c1c28;
+            --panel3:  #22222f;
+            --border:  #2a2a3a;
+            --border2: #3a3a50;
+            --gold:    #f5a623;
+            --gold2:   #d4881a;
+            --purple:  #a855f7;
+            --teal:    #2dd4bf;
+            --green:   #4ade80;
+            --red:     #f87171;
+            --text:    #e8e8f0;
+            --dim:     #6b6b85;
+            --dim2:    #4a4a60;
         }
 
         html { scroll-behavior: smooth; }
@@ -30,7 +38,7 @@
         body {
             background: var(--bg);
             color: var(--text);
-            font-family: 'Inter', sans-serif;
+            font-family: 'Segoe UI', 'Inter', sans-serif;
         }
 
         .mc { font-family: 'Minecraft', sans-serif; }
@@ -40,24 +48,29 @@
             bottom: 24px;
             right: 24px;
             z-index: 999;
-            background: rgba(13,13,13,0.9);
+            background: var(--panel2);
             border: 1px solid var(--border);
             color: var(--gold);
-            font-family: 'Inter', sans-serif;
+            font-family: 'Segoe UI', sans-serif;
             font-size: 11px;
             font-weight: 600;
             letter-spacing: 1px;
-            padding: 8px 16px;
+            padding: 9px 18px;
+            border-radius: 6px;
             cursor: pointer;
-            transition: border-color 0.2s;
+            transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
         }
-        #music-toggle:hover { border-color: var(--gold); }
+        #music-toggle:hover {
+            border-color: var(--gold);
+            background: var(--panel3);
+            box-shadow: 0 0 20px rgba(245,166,35,0.15);
+        }
 
         nav {
             position: fixed;
             top: 0; left: 0; right: 0;
             z-index: 100;
-            background: rgba(8,8,8,0.96);
+            background: rgba(15,15,23,0.96);
             border-bottom: 1px solid var(--border);
             backdrop-filter: blur(12px);
             display: flex;
@@ -72,7 +85,7 @@
             font-size: 16px;
             color: var(--gold);
             letter-spacing: 2px;
-            text-shadow: 0 0 20px rgba(255,170,0,0.4);
+            text-shadow: 0 0 20px rgba(245,166,35,0.4);
         }
 
         .nav-links { display: flex; gap: 32px; align-items: center; }
@@ -88,15 +101,21 @@
         .nav-links a:hover { color: var(--gold); }
 
         .nav-badge {
-            background: var(--gold);
-            color: #000;
+            background: var(--gold2);
+            border: 1px solid var(--gold);
+            border-radius: 6px;
+            color: #0f0f17;
             font-size: 10px;
             font-weight: 700;
             letter-spacing: 1px;
-            padding: 4px 10px;
+            padding: 6px 14px;
             text-transform: uppercase;
             text-decoration: none !important;
-            color: #000 !important;
+            transition: background 0.15s, box-shadow 0.15s;
+        }
+        .nav-badge:hover {
+            background: var(--gold);
+            box-shadow: 0 0 16px rgba(245,166,35,0.35);
         }
 
         .hero {
@@ -116,15 +135,16 @@
             top: 40%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 700px;
-            height: 700px;
-            background: radial-gradient(circle, rgba(255,170,0,0.07) 0%, transparent 65%);
+            width: 760px;
+            height: 760px;
+            background: radial-gradient(circle, rgba(245,166,35,0.08) 0%, rgba(168,85,247,0.03) 45%, transparent 65%);
             pointer-events: none;
         }
 
         .hero-badge {
             display: inline-block;
-            border: 1px solid rgba(255,170,0,0.25);
+            border: 1px solid rgba(245,166,35,0.25);
+            border-radius: 20px;
             color: var(--gold2);
             font-size: 10px;
             font-weight: 600;
@@ -141,7 +161,7 @@
             letter-spacing: 4px;
             line-height: 1;
             margin-bottom: 24px;
-            text-shadow: 0 0 80px rgba(255,170,0,0.25);
+            text-shadow: 0 0 80px rgba(245,166,35,0.25);
         }
 
         .hero p {
@@ -155,21 +175,27 @@
         .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
 
         .btn-gold {
-            background: var(--gold);
-            color: #000;
+            background: var(--gold2);
+            border: 1px solid var(--gold);
+            border-radius: 6px;
+            color: #0f0f17;
             font-size: 12px;
             font-weight: 700;
             letter-spacing: 2px;
             text-transform: uppercase;
             padding: 14px 36px;
             text-decoration: none;
-            transition: background 0.15s, transform 0.1s;
+            transition: background 0.15s, transform 0.1s, box-shadow 0.15s;
             display: inline-block;
         }
-        .btn-gold:hover { background: #FFB733; transform: translateY(-2px); }
+        .btn-gold:hover {
+            background: var(--gold);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 24px rgba(245,166,35,0.25);
+        }
 
         .btn-outline {
-            background: transparent;
+            background: var(--panel2);
             color: var(--text);
             font-size: 12px;
             font-weight: 600;
@@ -177,11 +203,12 @@
             text-transform: uppercase;
             padding: 14px 36px;
             border: 1px solid var(--border);
+            border-radius: 6px;
             text-decoration: none;
-            transition: border-color 0.2s, color 0.2s;
+            transition: border-color 0.2s, color 0.2s, background 0.2s;
             display: inline-block;
         }
-        .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+        .btn-outline:hover { border-color: var(--border2); background: var(--panel3); color: var(--gold); }
 
         .section { padding: 100px 48px; max-width: 1140px; margin: 0 auto; }
 
@@ -220,22 +247,24 @@
         .features-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            border: 1px solid var(--border);
+            gap: 12px;
         }
 
         .feature-card {
             padding: 32px 28px;
-            border-right: 1px solid var(--border);
-            border-bottom: 1px solid var(--border);
+            background: var(--panel2);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            transition: border-color 0.2s, background 0.2s;
         }
-        .feature-card:nth-child(3n) { border-right: none; }
-        .feature-card:nth-last-child(-n+3) { border-bottom: none; }
+        .feature-card:hover { border-color: var(--border2); background: var(--panel3); }
 
         .feature-icon {
             width: 36px;
             height: 36px;
-            background: rgba(255,170,0,0.08);
-            border: 1px solid rgba(255,170,0,0.15);
+            background: rgba(245,166,35,0.08);
+            border: 1px solid rgba(245,166,35,0.18);
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -261,7 +290,7 @@
         .screenshots-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
+            gap: 14px;
             margin-top: 48px;
         }
 
@@ -269,9 +298,12 @@
             position: relative;
             overflow: hidden;
             border: 1px solid var(--border);
+            border-radius: 10px;
             aspect-ratio: 16/9;
             background: var(--panel);
+            transition: border-color 0.2s;
         }
+        .screenshot:hover { border-color: var(--border2); }
 
         .screenshot img {
             width: 100%;
@@ -286,7 +318,7 @@
         .screenshot-label {
             position: absolute;
             bottom: 0; left: 0; right: 0;
-            background: rgba(0,0,0,0.7);
+            background: rgba(15,15,23,0.85);
             border-top: 1px solid var(--border);
             padding: 8px 14px;
             font-size: 11px;
@@ -306,8 +338,10 @@
         .season-card {
             position: relative;
             border: 1px solid var(--border);
+            border-radius: 12px;
             overflow: hidden;
-            background: var(--panel);
+            background: var(--panel2);
+            transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s;
         }
 
         .season-card img {
@@ -324,8 +358,19 @@
             height: 3px;
             z-index: 2;
         }
-        .season-card.s1::before { background: #AA44FF; }
-        .season-card.s2::before { background: #00FFAA; }
+        .season-card.s1::before { background: var(--purple); }
+        .season-card.s2::before { background: var(--teal); }
+
+        .season-card.s1:hover {
+            border-color: var(--purple);
+            box-shadow: 0 0 32px rgba(168,85,247,0.18);
+            transform: translateY(-3px);
+        }
+        .season-card.s2:hover {
+            border-color: var(--teal);
+            box-shadow: 0 0 32px rgba(45,212,191,0.18);
+            transform: translateY(-3px);
+        }
 
         .season-info {
             padding: 20px 22px;
@@ -367,7 +412,7 @@
             position: absolute;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            background: linear-gradient(to right, rgba(8,8,8,0.97) 40%, rgba(8,8,8,0.6) 100%);
+            background: linear-gradient(to right, rgba(15,15,23,0.97) 40%, rgba(15,15,23,0.6) 100%);
             pointer-events: none;
         }
 
@@ -380,8 +425,9 @@
 
         .studio-beta-badge {
             display: inline-block;
-            background: rgba(255,170,0,0.12);
-            border: 1px solid rgba(255,170,0,0.3);
+            background: rgba(245,166,35,0.12);
+            border: 1px solid rgba(245,166,35,0.3);
+            border-radius: 20px;
             color: var(--gold);
             font-size: 10px;
             font-weight: 700;
@@ -397,7 +443,7 @@
             color: var(--gold);
             letter-spacing: 3px;
             margin-bottom: 16px;
-            text-shadow: 0 0 40px rgba(255,170,0,0.2);
+            text-shadow: 0 0 40px rgba(245,166,35,0.2);
         }
 
         .studio-subtitle {
@@ -422,9 +468,8 @@
             text-transform: uppercase;
             color: var(--gold2);
             margin-bottom: 28px;
-            padding: 8px 0;
-            border-top: 1px solid rgba(255,170,0,0.15);
-            border-bottom: 1px solid rgba(255,170,0,0.15);
+            border: 1px solid rgba(245,166,35,0.2);
+            border-radius: 6px;
             display: inline-block;
             padding: 8px 20px;
         }
@@ -447,16 +492,18 @@
 
         .studio-feature::before {
             content: '';
-            width: 4px;
-            height: 4px;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
             background: var(--gold);
             flex-shrink: 0;
         }
 
         .download-block {
-            background: var(--panel);
+            background: var(--panel2);
             border: 1px solid var(--border);
             border-top: 2px solid var(--gold);
+            border-radius: 12px;
             padding: 72px 48px;
             text-align: center;
         }
@@ -478,7 +525,8 @@
 
         .version-tag {
             display: inline-block;
-            border: 1px solid rgba(255,170,0,0.2);
+            border: 1px solid rgba(245,166,35,0.2);
+            border-radius: 20px;
             color: var(--gold2);
             font-size: 10px;
             font-weight: 600;
@@ -498,8 +546,9 @@
         .defender-box {
             max-width: 540px;
             margin: 32px auto 0;
-            background: rgba(255,170,0,0.04);
-            border: 1px solid rgba(255,170,0,0.12);
+            background: rgba(245,166,35,0.04);
+            border: 1px solid rgba(245,166,35,0.14);
+            border-radius: 8px;
             padding: 18px 22px;
             text-align: left;
         }
@@ -545,8 +594,6 @@
             .nav-links { gap: 16px; }
             .section { padding: 70px 24px; }
             .features-grid { grid-template-columns: 1fr 1fr; }
-            .feature-card:nth-child(2n) { border-right: none; }
-            .feature-card:nth-child(3n) { border-right: 1px solid var(--border); }
             .seasons-grid { grid-template-columns: 1fr; }
             .screenshots-grid { grid-template-columns: 1fr; }
             .studio-section { padding: 70px 24px; }
@@ -557,7 +604,6 @@
 
         @media (max-width: 600px) {
             .features-grid { grid-template-columns: 1fr; }
-            .feature-card { border-right: none; }
             .nav-links .nav-badge { display: none; }
         }
     </style>
@@ -577,7 +623,7 @@
         <a href="#studio">Studio (W.I.P)</a>
         <a href="#download">Download!</a>
         <a href="https://github.com/B0zin0/StoryForge" target="_blank">GitHub</a>
-        <a href="#download" class="nav-badge">Download v1.1</a>
+        <a href="#download" class="nav-badge">Download v1.20.1</a>
     </div>
 </nav>
 
@@ -594,7 +640,6 @@
 
 <div class="divider"></div>
 
-<!-- Features -->
 <div class="section" id="features">
     <div class="section-tag">What's inside?</div>
     <h2 class="section-title">Everything you need to play</h2>
@@ -655,19 +700,19 @@
 
     <div class="screenshots-grid">
         <div class="screenshot">
-            <img src="home.png" alt="Home screen" onerror="this.parentElement.style.background='#111';this.style.display='none'"/>
+            <img src="home.png" alt="Home screen" onerror="this.parentElement.style.background='#16161f';this.style.display='none'"/>
             <div class="screenshot-label">Home Screen</div>
         </div>
         <div class="screenshot">
-            <img src="settings.png" alt="Settings" onerror="this.parentElement.style.background='#111';this.style.display='none'"/>
+            <img src="settings.png" alt="Settings" onerror="this.parentElement.style.background='#16161f';this.style.display='none'"/>
             <div class="screenshot-label">Settings</div>
         </div>
         <div class="screenshot">
-            <img src="mods.png" alt="Mod Manager" onerror="this.parentElement.style.background='#111';this.style.display='none'"/>
+            <img src="mods.png" alt="Mod Manager" onerror="this.parentElement.style.background='#16161f';this.style.display='none'"/>
             <div class="screenshot-label">Mod Manager</div>
         </div>
         <div class="screenshot">
-            <img src="about.png" alt="About" onerror="this.parentElement.style.background='#111';this.style.display='none'"/>
+            <img src="about.png" alt="About" onerror="this.parentElement.style.background='#16161f';this.style.display='none'"/>
             <div class="screenshot-label">About</div>
         </div>
     </div>
@@ -721,12 +766,11 @@
     </div>
 </div>
 
-<!-- Download -->
 <div class="download-block" id="download">
     <span class="version-tag">(Latest) v1.20.1 — Windows 10/11 — Free</span>
     <h2>DOWNLOAD</h2>
     <p>No installer. No account. Just unzip and run.<br> Warning: Keep StoryForge.exe and the Assets folder together.</p>
-    <a href="https://github.com/B0zin0/StoryForge/releases/latest" class="btn-gold" target="_blank">Download StoryForge v1.1</a>
+    <a href="https://github.com/B0zin0/StoryForge/releases/latest" class="btn-gold" target="_blank">Download StoryForge v1.20.1</a>
     <div class="sysreq">Windows 10 or 11 (64-bit) · No install required · ~161MB</div>
 
     <div class="defender-box">
