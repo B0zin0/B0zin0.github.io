@@ -3,7 +3,7 @@
 > Full report at https://b0zin0.github.io/#download
 
 ## Downloads/Links
-***[StoryForge v1.20.2](https://github.com/B0zin0/StoryForge/releases/latest)***
+***[StoryForge v1.20.1](https://github.com/B0zin0/StoryForge/releases/latest)***
 > A sleek, modern launcher for **Minecraft: Story Mode** Season 1 & Season 2.
 
 ## Requirements
